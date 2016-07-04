@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config>
+  <master_sid>INT</master_sid>
+  <slave_id>INT</slave_id>
+  <instrinfo_PRDI>VARCHAR(16)</instrinfo_PRDI>
+  <instrinfo_FIWV>VARCHAR(16)</instrinfo_FIWV>
+  <instrinfo_SNO>VARCHAR(16)</instrinfo_SNO>
+  <instrinfo_IID>VARCHAR(16)</instrinfo_IID>
+  <instrinfo_BRND>VARCHAR(4)</instrinfo_BRND>
+  <instrinfo_IAPL>VARCHAR(4)</instrinfo_IAPL>
+  <instrinfo_LMOF>TINYINT</instrinfo_LMOF>
+  <smpinfo_SNO>VARCHAR(16)</smpinfo_SNO>
+  <smpinfo_SEQ>SMALLINT</smpinfo_SEQ>
+  <smpinfo_DATE>VARCHAR(32)</smpinfo_DATE>
+  <smpinfo_ID>VARCHAR(32)</smpinfo_ID>
+  <smpinfo_ID2>VARCHAR(32)</smpinfo_ID2>
+  <smpinfo_APNU>TINYINT</smpinfo_APNU>
+  <smpinfo_APNA>VARCHAR(32)</smpinfo_APNA>
+  <smpinfo_ASPM>VARCHAR(32)</smpinfo_ASPM>
+  <smpinfo_ASPS>TINYINT</smpinfo_ASPS>
+  <smpinfo_SORC>TINYINT</smpinfo_SORC>
+  <smpinfo_BLMD>TINYINT</smpinfo_BLMD>
+  <smpinfo_BLNK>TINYINT</smpinfo_BLNK>
+  <smpinfo_STYP>TINYINT</smpinfo_STYP>
+  <smpinfo_RPD>TINYINT</smpinfo_RPD>
+  <smpinfo_RPDS>TINYINT</smpinfo_RPDS>
+  <smpinfo_RPDL>TINYINT</smpinfo_RPDL>
+  <smpinfo_RPDH>TINYINT</smpinfo_RPDH>
+  <smpinfo_RPDF>TINYINT</smpinfo_RPDF>
+  <smpinfo_MBTE>FLOAT</smpinfo_MBTE>
+  <smpinfo_MCVO>VARCHAR(32)</smpinfo_MCVO>
+  <smpinfo_WDDM>TINYINT</smpinfo_WDDM>
+  <smpinfo_WDDP>TINYINT</smpinfo_WDDP>
+  <smpinfo_WDMS>TINYINT</smpinfo_WDMS>
+  <smpinfo_WDMA>TINYINT</smpinfo_WDMA>
+  <smpinfo_WDFB>TINYINT</smpinfo_WDFB>
+  <smpinfo_WDLL>SMALLINT</smpinfo_WDLL>
+  <smpinfo_WDLH>SMALLINT</smpinfo_WDLH>
+  <smpinfo_WDIL>SMALLINT</smpinfo_WDIL>
+  <smpinfo_WDIH>SMALLINT</smpinfo_WDIH>
+  <smpinfo_WDOM>SMALLINT</smpinfo_WDOM>
+  <smpinfo_WDWD>SMALLINT</smpinfo_WDWD>
+  <smpinfo_WLGH>SMALLINT</smpinfo_WLGH>
+  <smpinfo_WLGL>SMALLINT</smpinfo_WLGL>
+  <smpinfo_WDCL>SMALLINT</smpinfo_WDCL>
+  <smpinfo_WDCH>SMALLINT</smpinfo_WDCH>
+  <smpinfo_CAPL>VARCHAR(4)</smpinfo_CAPL>
+  <smpinfo_CLVL>VARCHAR(4)</smpinfo_CLVL>
+  <smpinfo_CEXP>VARCHAR(32)</smpinfo_CEXP>
+  <smpinfo_EOMD>VARCHAR(32)</smpinfo_EOMD>
+  <smpinfo_EODL>VARCHAR(32)</smpinfo_EODL>
+  <smpinfo_EODH>VARCHAR(32)</smpinfo_EODH>
+  <smpinfo_EOAC>VARCHAR(32)</smpinfo_EOAC>
+  <smpinfo_EOWC>VARCHAR(32)</smpinfo_EOWC>
+  <smpinfo_XEIT>VARCHAR(32)</smpinfo_XEIT>
+  <smpinfo_EASS>VARCHAR(32)</smpinfo_EASS>
+  <smpinfo_OPID>VARCHAR(16)</smpinfo_OPID>
+  <smpinfo_ASWP>VARCHAR(16)</smpinfo_ASWP>
+  <smpresults_SNO>VARCHAR(16)</smpresults_SNO>
+  <smpresults_SEQ>SMALLINT</smpresults_SEQ>
+  <smpresults_DATE>VARCHAR(32)</smpresults_DATE>
+  <smpresults_RBC>FLOAT</smpresults_RBC>
+  <smpresults_RBC_f>VARCHAR(4)</smpresults_RBC_f>
+  <smpresults_RBC_h>FLOAT</smpresults_RBC_h>
+  <smpresults_RBC_l>FLOAT</smpresults_RBC_l>
+  <smpresults_RBC_u>FLOAT</smpresults_RBC_u>
+  <smpresults_MCV>FLOAT</smpresults_MCV>
+  <smpresults_MCV_f>VARCHAR(4)</smpresults_MCV_f>
+  <smpresults_MCV_h>FLOAT</smpresults_MCV_h>
+  <smpresults_MCV_l>FLOAT</smpresults_MCV_l>
+  <smpresults_MCV_u>FLOAT</smpresults_MCV_u>
+  <smpresults_HCT>FLOAT</smpresults_HCT>
+  <smpresults_HCT_f>VARCHAR(4)</smpresults_HCT_f>
+  <smpresults_HCT_h>FLOAT</smpresults_HCT_h>
+  <smpresults_HCT_l>FLOAT</smpresults_HCT_l>
+  <smpresults_HCT_u>FLOAT</smpresults_HCT_u>
+  <smpresults_MCH>FLOAT</smpresults_MCH>
+  <smpresults_MCH_f>VARCHAR(4)</smpresults_MCH_f>
+  <smpresults_MCH_h>FLOAT</smpresults_MCH_h>
+  <smpresults_MCH_l>FLOAT</smpresults_MCH_l>
+  <smpresults_MCH_u>FLOAT</smpresults_MCH_u>
+  <smpresults_MCHC>FLOAT</smpresults_MCHC>
+  <smpresults_MCHC_f>VARCHAR(4)</smpresults_MCHC_f>
+  <smpresults_MCHC_h>FLOAT</smpresults_MCHC_h>
+  <smpresults_MCHC_l>FLOAT</smpresults_MCHC_l>
+  <smpresults_MCHC_u>FLOAT</smpresults_MCHC_u>
+  <smpresults_MCHC_r>FLOAT</smpresults_MCHC_r>
+  <smpresults_RDWR>FLOAT</smpresults_RDWR>
+  <smpresults_RDWR_f>VARCHAR(4)</smpresults_RDWR_f>
+  <smpresults_RDWR_h>FLOAT</smpresults_RDWR_h>
+  <smpresults_RDWR_l>FLOAT</smpresults_RDWR_l>
+  <smpresults_RDWR_u>FLOAT</smpresults_RDWR_u>
+  <smpresults_RDWR_r>FLOAT</smpresults_RDWR_r>
+  <smpresults_RDWA>FLOAT</smpresults_RDWA>
+  <smpresults_RDWA_f>VARCHAR(4)</smpresults_RDWA_f>
+  <smpresults_RDWA_h>FLOAT</smpresults_RDWA_h>
+  <smpresults_RDWA_l>FLOAT</smpresults_RDWA_l>
+  <smpresults_RDWA_u>FLOAT</smpresults_RDWA_u>
+  <smpresults_PLT>FLOAT</smpresults_PLT>
+  <smpresults_PLT_f>VARCHAR(4)</smpresults_PLT_f>
+  <smpresults_PLT_h>FLOAT</smpresults_PLT_h>
+  <smpresults_PLT_l>FLOAT</smpresults_PLT_l>
+  <smpresults_PLT_u>FLOAT</smpresults_PLT_u>
+  <smpresults_PLT_r>FLOAT</smpresults_PLT_r>
+  <smpresults_MPV>FLOAT</smpresults_MPV>
+  <smpresults_MPV_f>VARCHAR(4)</smpresults_MPV_f>
+  <smpresults_MPV_h>FLOAT</smpresults_MPV_h>
+  <smpresults_MPV_l>FLOAT</smpresults_MPV_l>
+  <smpresults_MPV_u>FLOAT</smpresults_MPV_u>
+  <smpresults_PCT>FLOAT</smpresults_PCT>
+  <smpresults_PCT_f>VARCHAR(4)</smpresults_PCT_f>
+  <smpresults_PCT_h>FLOAT</smpresults_PCT_h>
+  <smpresults_PCT_l>FLOAT</smpresults_PCT_l>
+  <smpresults_PCT_u>FLOAT</smpresults_PCT_u>
+  <smpresults_PDW>FLOAT</smpresults_PDW>
+  <smpresults_PDW_f>VARCHAR(4)</smpresults_PDW_f>
+  <smpresults_PDW_h>FLOAT</smpresults_PDW_h>
+  <smpresults_PDW_l>FLOAT</smpresults_PDW_l>
+  <smpresults_PDW_u>FLOAT</smpresults_PDW_u>
+  <smpresults_LPCR>FLOAT</smpresults_LPCR>
+  <smpresults_LPCR_f>VARCHAR(4)</smpresults_LPCR_f>
+  <smpresults_LPCR_h>FLOAT</smpresults_LPCR_h>
+  <smpresults_LPCR_l>FLOAT</smpresults_LPCR_l>
+  <smpresults_LPCR_u>FLOAT</smpresults_LPCR_u>
+  <smpresults_HGB>FLOAT</smpresults_HGB>
+  <smpresults_HGB_f>VARCHAR(4)</smpresults_HGB_f>
+  <smpresults_HGB_h>FLOAT</smpresults_HGB_h>
+  <smpresults_HGB_l>FLOAT</smpresults_HGB_l>
+  <smpresults_HGB_u>FLOAT</smpresults_HGB_u>
+  <smpresults_HGB_r>FLOAT</smpresults_HGB_r>
+  <smpresults_WBC>FLOAT</smpresults_WBC>
+  <smpresults_WBC_f>VARCHAR(4)</smpresults_WBC_f>
+  <smpresults_WBC_h>FLOAT</smpresults_WBC_h>
+  <smpresults_WBC_l>FLOAT</smpresults_WBC_l>
+  <smpresults_WBC_u>FLOAT</smpresults_WBC_u>
+  <smpresults_WBC_r>FLOAT</smpresults_WBC_r>
+  <smpresults_LA>FLOAT</smpresults_LA>
+  <smpresults_LA_f>VARCHAR(4)</smpresults_LA_f>
+  <smpresults_LA_h>FLOAT</smpresults_LA_h>
+  <smpresults_LA_l>FLOAT</smpresults_LA_l>
+  <smpresults_LA_u>FLOAT</smpresults_LA_u>
+  <smpresults_MA>FLOAT</smpresults_MA>
+  <smpresults_MA_f>VARCHAR(4)</smpresults_MA_f>
+  <smpresults_MA_h>FLOAT</smpresults_MA_h>
+  <smpresults_MA_l>FLOAT</smpresults_MA_l>
+  <smpresults_MA_u>FLOAT</smpresults_MA_u>
+  <smpresults_GA>FLOAT</smpresults_GA>
+  <smpresults_GA_f>VARCHAR(4)</smpresults_GA_f>
+  <smpresults_GA_h>FLOAT</smpresults_GA_h>
+  <smpresults_GA_l>FLOAT</smpresults_GA_l>
+  <smpresults_GA_u>FLOAT</smpresults_GA_u>
+  <smpresults_LR>FLOAT</smpresults_LR>
+  <smpresults_LR_f>VARCHAR(4)</smpresults_LR_f>
+  <smpresults_LR_h>FLOAT</smpresults_LR_h>
+  <smpresults_LR_l>FLOAT</smpresults_LR_l>
+  <smpresults_LR_u>FLOAT</smpresults_LR_u>
+  <smpresults_MR>FLOAT</smpresults_MR>
+  <smpresults_MR_f>VARCHAR(4)</smpresults_MR_f>
+  <smpresults_MR_h>FLOAT</smpresults_MR_h>
+  <smpresults_MR_l>FLOAT</smpresults_MR_l>
+  <smpresults_MR_u>FLOAT</smpresults_MR_u>
+  <smpresults_GR>FLOAT</smpresults_GR>
+  <smpresults_GR_f>VARCHAR(4)</smpresults_GR_f>
+  <smpresults_GR_h>FLOAT</smpresults_GR_h>
+  <smpresults_GR_l>FLOAT</smpresults_GR_l>
+  <smpresults_GR_u>FLOAT</smpresults_GR_u>
+  <smpresults_EA>FLOAT</smpresults_EA>
+  <smpresults_EA_f>VARCHAR(4)</smpresults_EA_f>
+  <smpresults_EA_h>FLOAT</smpresults_EA_h>
+  <smpresults_EA_l>FLOAT</smpresults_EA_l>
+  <smpresults_EA_u>FLOAT</smpresults_EA_u>
+  <smpresults_ER>FLOAT</smpresults_ER>
+  <smpresults_ER_f>VARCHAR(4)</smpresults_ER_f>
+  <smpresults_ER_h>FLOAT</smpresults_ER_h>
+  <smpresults_ER_l>FLOAT</smpresults_ER_l>
+  <smpresults_ER_u>FLOAT</smpresults_ER_u>
+  <tparams_SNO>VARCHAR(16)</tparams_SNO>
+  <tparams_SEQ>SMALLINT</tparams_SEQ>
+  <tparams_DATE>VARCHAR(32)</tparams_DATE>
+  <tparams_RCT>SMALLINT UNSIGNED</tparams_RCT>
+  <tparams_WCT>SMALLINT UNSIGNED</tparams_WCT>
+  <tparams_xfrt>SMALLINT UNSIGNED</tparams_xfrt>
+  <tparams_acps>TINYINT</tparams_acps>
+  <tparams_asl1>TINYINT</tparams_asl1>
+  <tparams_asl2>TINYINT</tparams_asl2>
+  <tparams_rdmx>SMALLINT UNSIGNED</tparams_rdmx>
+  <tparams_rdbl>SMALLINT UNSIGNED</tparams_rdbl>
+  <tparams_rpds>SMALLINT UNSIGNED</tparams_rpds>
+  <tparams_rpdt>SMALLINT UNSIGNED</tparams_rpdt>
+  <tparams_rpdd>SMALLINT UNSIGNED</tparams_rpdd>
+  <tparams_rpus>SMALLINT UNSIGNED</tparams_rpus>
+  <tparams_rpua>SMALLINT UNSIGNED</tparams_rpua>
+  <tparams_rput>SMALLINT UNSIGNED</tparams_rput>
+  <tparams_rpud>SMALLINT UNSIGNED</tparams_rpud>
+  <tparams_rbrn>TINYINT</tparams_rbrn>
+  <tparams_rpdb>TINYINT</tparams_rpdb>
+  <tparams_rpdp>TINYINT</tparams_rpdp>
+  <tparams_rpdo>TINYINT</tparams_rpdo>
+  <tparams_rpub>TINYINT</tparams_rpub>
+  <tparams_rpup>TINYINT</tparams_rpup>
+  <tparams_rpu1>TINYINT</tparams_rpu1>
+  <tparams_rpu2>TINYINT</tparams_rpu2>
+  <tparams_rpuu>TINYINT</tparams_rpuu>
+  <tparams_wdmx>SMALLINT UNSIGNED</tparams_wdmx>
+  <tparams_wdbl>SMALLINT UNSIGNED</tparams_wdbl>
+  <tparams_wpds>SMALLINT UNSIGNED</tparams_wpds>
+  <tparams_wpdt>SMALLINT UNSIGNED</tparams_wpdt>
+  <tparams_wpdd>SMALLINT UNSIGNED</tparams_wpdd>
+  <tparams_wpus>SMALLINT UNSIGNED</tparams_wpus>
+  <tparams_wpua>SMALLINT UNSIGNED</tparams_wpua>
+  <tparams_wput>SMALLINT UNSIGNED</tparams_wput>
+  <tparams_wpud>SMALLINT UNSIGNED</tparams_wpud>
+  <tparams_wbrn>TINYINT</tparams_wbrn>
+  <tparams_wpdb>TINYINT</tparams_wpdb>
+  <tparams_wpdp>TINYINT</tparams_wpdp>
+  <tparams_wpdo>TINYINT</tparams_wpdo>
+  <tparams_wpub>TINYINT</tparams_wpub>
+  <tparams_wpup>TINYINT</tparams_wpup>
+  <tparams_wpu1>TINYINT</tparams_wpu1>
+  <tparams_wpu2>TINYINT</tparams_wpu2>
+  <tparams_wpuu>TINYINT</tparams_wpuu>
+  <tparams_dpdb>TINYINT</tparams_dpdb>
+  <tparams_dpdp>TINYINT</tparams_dpdp>
+  <tparams_dpdo>TINYINT</tparams_dpdo>
+  <tparams_dpup>TINYINT</tparams_dpup>
+  <tparams_dpuo>TINYINT</tparams_dpuo>
+  <tparams_dpuf>TINYINT</tparams_dpuf>
+  <tparams_ipds>SMALLINT UNSIGNED</tparams_ipds>
+  <tparams_ipdt>SMALLINT UNSIGNED</tparams_ipdt>
+  <tparams_ipdd>SMALLINT UNSIGNED</tparams_ipdd>
+  <tparams_ipus>SMALLINT UNSIGNED</tparams_ipus>
+  <tparams_iput>SMALLINT UNSIGNED</tparams_iput>
+  <tparams_ipud>SMALLINT UNSIGNED</tparams_ipud>
+  <tparams_ipdb>TINYINT</tparams_ipdb>
+  <tparams_ipdp>TINYINT</tparams_ipdp>
+  <tparams_ipdo>TINYINT</tparams_ipdo>
+  <tparams_ipup>TINYINT</tparams_ipup>
+  <tparams_ipuo>TINYINT</tparams_ipuo>
+  <tparams_ipuf>TINYINT</tparams_ipuf>
+  <tparams_lpds>SMALLINT UNSIGNED</tparams_lpds>
+  <tparams_lpdt>SMALLINT UNSIGNED</tparams_lpdt>
+  <tparams_lpdd>SMALLINT UNSIGNED</tparams_lpdd>
+  <tparams_lpus>SMALLINT UNSIGNED</tparams_lpus>
+  <tparams_lput>SMALLINT UNSIGNED</tparams_lput>
+  <tparams_lpud>SMALLINT UNSIGNED</tparams_lpud>
+  <tparams_lpdb>TINYINT</tparams_lpdb>
+  <tparams_lpdp>TINYINT</tparams_lpdp>
+  <tparams_lpdo>TINYINT</tparams_lpdo>
+  <tparams_lpup>TINYINT</tparams_lpup>
+  <tparams_lpuo>TINYINT</tparams_lpuo>
+  <tparams_hbfo>SMALLINT UNSIGNED</tparams_hbfo>
+  <tparams_aspt>SMALLINT UNSIGNED</tparams_aspt>
+  <tparams_rdmn>SMALLINT UNSIGNED</tparams_rdmn>
+  <tparams_rrmn>SMALLINT UNSIGNED</tparams_rrmn>
+  <tparams_rrmx>SMALLINT UNSIGNED</tparams_rrmx>
+  <tparams_rrmd>SMALLINT UNSIGNED</tparams_rrmd>
+  <tparams_rrdp>SMALLINT UNSIGNED</tparams_rrdp>
+  <tparams_wdmn>SMALLINT UNSIGNED</tparams_wdmn>
+  <tparams_wrmn>SMALLINT UNSIGNED</tparams_wrmn>
+  <tparams_wrmx>SMALLINT UNSIGNED</tparams_wrmx>
+  <tparams_wrmd>SMALLINT UNSIGNED</tparams_wrmd>
+  <tparams_wrdp>SMALLINT UNSIGNED</tparams_wrdp>
+  <tparams_dpds>SMALLINT UNSIGNED</tparams_dpds>
+  <tparams_dpdt>SMALLINT UNSIGNED</tparams_dpdt>
+  <tparams_dpdd>SMALLINT UNSIGNED</tparams_dpdd>
+  <tparams_dpus>SMALLINT UNSIGNED</tparams_dpus>
+  <tparams_dput>SMALLINT UNSIGNED</tparams_dput>
+  <tparams_dpud>SMALLINT UNSIGNED</tparams_dpud>
+  <tparams_hbft>SMALLINT UNSIGNED</tparams_hbft>
+  <tparams_ebrn>TINYINT</tparams_ebrn>
+  <tparams_epdb>TINYINT</tparams_epdb>
+  <tparams_epdp>TINYINT</tparams_epdp>
+  <tparams_epdo>TINYINT</tparams_epdo>
+  <tparams_epub>TINYINT</tparams_epub>
+  <tparams_epup>TINYINT</tparams_epup>
+  <tparams_epu1>TINYINT</tparams_epu1>
+  <tparams_epu2>TINYINT</tparams_epu2>
+  <tparams_epuu>TINYINT</tparams_epuu>
+  <tparams_opdb>TINYINT</tparams_opdb>
+  <tparams_opdp>TINYINT</tparams_opdp>
+  <tparams_opdo>TINYINT</tparams_opdo>
+  <tparams_opup>TINYINT</tparams_opup>
+  <tparams_opuo>TINYINT</tparams_opuo>
+  <tparams_ECT>SMALLINT UNSIGNED</tparams_ECT>
+  <tparams_edmx>SMALLINT UNSIGNED</tparams_edmx>
+  <tparams_edbl>SMALLINT UNSIGNED</tparams_edbl>
+  <tparams_epds>SMALLINT UNSIGNED</tparams_epds>
+  <tparams_epdt>SMALLINT UNSIGNED</tparams_epdt>
+  <tparams_epdd>SMALLINT UNSIGNED</tparams_epdd>
+  <tparams_epus>SMALLINT UNSIGNED</tparams_epus>
+  <tparams_epua>SMALLINT UNSIGNED</tparams_epua>
+  <tparams_eput>SMALLINT UNSIGNED</tparams_eput>
+  <tparams_epud>SMALLINT UNSIGNED</tparams_epud>
+  <tparams_opds>SMALLINT UNSIGNED</tparams_opds>
+  <tparams_opdt>SMALLINT UNSIGNED</tparams_opdt>
+  <tparams_opus>SMALLINT UNSIGNED</tparams_opus>
+  <tparams_oput>SMALLINT UNSIGNED</tparams_oput>
+  <tparams_exft>SMALLINT UNSIGNED</tparams_exft>
+  <tparams_east>SMALLINT UNSIGNED</tparams_east>
+  <tparams_pmpw>SMALLINT UNSIGNED</tparams_pmpw>
+  <tparams_edmn>SMALLINT UNSIGNED</tparams_edmn>
+  <tparams_ermn>SMALLINT UNSIGNED</tparams_ermn>
+  <tparams_ermx>SMALLINT UNSIGNED</tparams_ermx>
+  <tparams_ermd>SMALLINT UNSIGNED</tparams_ermd>
+  <tparams_erdp>SMALLINT UNSIGNED</tparams_erdp>
+  <hgrams_SNO>VARCHAR(16)</hgrams_SNO>
+  <hgrams_SEQ>SMALLINT</hgrams_SEQ>
+  <hgrams_DATE>VARCHAR(32)</hgrams_DATE>
+  <hgrams_PLT_m>SMALLINT</hgrams_PLT_m>
+  <hgrams_PLT_k>SMALLINT</hgrams_PLT_k>
+  <hgrams_PLT_w>SMALLINT</hgrams_PLT_w>
+  <hgrams_PLT_d>SMALLINT</hgrams_PLT_d>
+  <hgrams_PLT_hgdata>TEXT</hgrams_PLT_hgdata>
+  <hgrams_RBC_m>SMALLINT</hgrams_RBC_m>
+  <hgrams_RBC_k>SMALLINT</hgrams_RBC_k>
+  <hgrams_RBC_w>SMALLINT</hgrams_RBC_w>
+  <hgrams_RBC_d>SMALLINT</hgrams_RBC_d>
+  <hgrams_RBC_hgdata>TEXT</hgrams_RBC_hgdata>
+  <hgrams_WBC_m>SMALLINT</hgrams_WBC_m>
+  <hgrams_WBC_k>SMALLINT</hgrams_WBC_k>
+  <hgrams_WBC_w>SMALLINT</hgrams_WBC_w>
+  <hgrams_WBC_hgdata>TEXT</hgrams_WBC_hgdata>
+  <hgrams_WBC_hgdata_LYM>TEXT</hgrams_WBC_hgdata_LYM>
+  <hgrams_WBC_hgdata_MID>TEXT</hgrams_WBC_hgdata_MID>
+  <hgrams_WBC_hgdata_GRA>TEXT</hgrams_WBC_hgdata_GRA>
+  <hgrams_WBC_d>SMALLINT</hgrams_WBC_d>
+  <hgrams_WBC_d_2>SMALLINT</hgrams_WBC_d_2>
+  <hgrams_WBC_d_3>SMALLINT</hgrams_WBC_d_3>
+  <hgrams_EOS_m>SMALLINT</hgrams_EOS_m>
+  <hgrams_EOS_k>SMALLINT</hgrams_EOS_k>
+  <hgrams_EOS_w>SMALLINT</hgrams_EOS_w>
+  <hgrams_EOS_d>SMALLINT</hgrams_EOS_d>
+  <hgrams_EOS_hgdata>TEXT</hgrams_EOS_hgdata>
+  <rawred_SNO>VARCHAR(16)</rawred_SNO>
+  <rawred_SEQ>SMALLINT</rawred_SEQ>
+  <rawred_DATE>VARCHAR(32)</rawred_DATE>
+  <rawred_RBC>VARCHAR(16)</rawred_RBC>
+  <rawred_MCV>VARCHAR(16)</rawred_MCV>
+  <rawred_PLT>VARCHAR(16)</rawred_PLT>
+  <rawred_MPV>VARCHAR(16)</rawred_MPV>
+  <rawred_RDWR>SMALLINT UNSIGNED</rawred_RDWR>
+  <rawred_RDWA>SMALLINT UNSIGNED</rawred_RDWA>
+  <rawred_PDW>SMALLINT UNSIGNED</rawred_PDW>
+  <rawred_RRAV_m>SMALLINT UNSIGNED</rawred_RRAV_m>
+  <rawred_RRAV_b>SMALLINT UNSIGNED</rawred_RRAV_b>
+  <rawred_RRAV_c>SMALLINT UNSIGNED</rawred_RRAV_c>
+  <rawred_RRAV_k>SMALLINT UNSIGNED</rawred_RRAV_k>
+  <rawred_RRAV_cte>VARCHAR(16)</rawred_RRAV_cte>
+  <rawred_RRAV_ccp>VARCHAR(16)</rawred_RRAV_ccp>
+  <rawred_RRAV>TEXT</rawred_RRAV>
+  <rawred_RRAV_>TEXT</rawred_RRAV_>
+  <rawred_RRRV_m>SMALLINT UNSIGNED</rawred_RRRV_m>
+  <rawred_RRRV_b>SMALLINT UNSIGNED</rawred_RRRV_b>
+  <rawred_RRRV_c>SMALLINT UNSIGNED</rawred_RRRV_c>
+  <rawred_RRRV_k>SMALLINT UNSIGNED</rawred_RRRV_k>
+  <rawred_RRRV_cte>VARCHAR(16)</rawred_RRRV_cte>
+  <rawred_RRRV_ccp>VARCHAR(16)</rawred_RRRV_ccp>
+  <rawred_RRRV>TEXT</rawred_RRRV>
+  <rawred_RRRV_>TEXT</rawred_RRRV_>
+  <rawred_RREJ>INT UNSIGNED</rawred_RREJ>
+  <rawred_RRBR>INT UNSIGNED</rawred_RRBR>
+  <rawred_ccctr>INT UNSIGNED</rawred_ccctr>
+  <rawred_ccwra>INT UNSIGNED</rawred_ccwra>
+  <rawred_ccwrr>INT UNSIGNED</rawred_ccwrr>
+  <rawred_ccwpa>INT UNSIGNED</rawred_ccwpa>
+  <rawred_ccwpr>INT UNSIGNED</rawred_ccwpr>
+  <rawred_ccnra>INT UNSIGNED</rawred_ccnra>
+  <rawred_ccnrr>INT UNSIGNED</rawred_ccnrr>
+  <rawred_ccnpa>INT UNSIGNED</rawred_ccnpa>
+  <rawred_ccnpr>INT UNSIGNED</rawred_ccnpr>
+  <rawred_cctrr>INT UNSIGNED</rawred_cctrr>
+  <rawred_ccbtr>INT UNSIGNED</rawred_ccbtr>
+  <rawred_ccbtp>INT UNSIGNED</rawred_ccbtp>
+  <rawred_a>INT UNSIGNED</rawred_a>
+  <rawred_mtctype>INT UNSIGNED</rawred_mtctype>
+  <rawred_mtcv>INT UNSIGNED</rawred_mtcv>
+  <rawred_mtci>INT UNSIGNED</rawred_mtci>
+  <rawred_mtct>INT UNSIGNED</rawred_mtct>
+  <rawred_mtcr>INT UNSIGNED</rawred_mtcr>
+  <rawred_mtcq>INT UNSIGNED</rawred_mtcq>
+  <rawred_mtcve>INT UNSIGNED</rawred_mtcve>
+  <rawred_mtcie>INT UNSIGNED</rawred_mtcie>
+  <rawred_mtcte>INT UNSIGNED</rawred_mtcte>
+  <rawred_mtcre>INT UNSIGNED</rawred_mtcre>
+  <rawred_mtcqe>INT UNSIGNED</rawred_mtcqe>
+  <rawwht_SNO>VARCHAR(16)</rawwht_SNO>
+  <rawwht_SEQ>SMALLINT</rawwht_SEQ>
+  <rawwht_DATE>VARCHAR(32)</rawwht_DATE>
+  <rawwht_WBC>VARCHAR(16)</rawwht_WBC>
+  <rawwht_RWAV_m>SMALLINT UNSIGNED</rawwht_RWAV_m>
+  <rawwht_RWAV_b>SMALLINT UNSIGNED</rawwht_RWAV_b>
+  <rawwht_RWAV_c>SMALLINT UNSIGNED</rawwht_RWAV_c>
+  <rawwht_RWAV_k>SMALLINT UNSIGNED</rawwht_RWAV_k>
+  <rawwht_RWAV_cte>VARCHAR(16)</rawwht_RWAV_cte>
+  <rawwht_RWAV_ccp>VARCHAR(16)</rawwht_RWAV_ccp>
+  <rawwht_RWAV>TEXT</rawwht_RWAV>
+  <rawwht_RWAV_>TEXT</rawwht_RWAV_>
+  <rawwht_RWEJ>INT UNSIGNED</rawwht_RWEJ>
+  <rawwht_RWBR>INT UNSIGNED</rawwht_RWBR>
+  <rawwht_ccctw>INT UNSIGNED</rawwht_ccctw>
+  <rawwht_ccwwa>INT UNSIGNED</rawwht_ccwwa>
+  <rawwht_ccwwr>INT UNSIGNED</rawwht_ccwwr>
+  <rawwht_ccnwa>INT UNSIGNED</rawwht_ccnwa>
+  <rawwht_ccnwr>INT UNSIGNED</rawwht_ccnwr>
+  <rawwht_cctrw>INT UNSIGNED</rawwht_cctrw>
+  <rawwht_ccbtw>INT UNSIGNED</rawwht_ccbtw>
+  <rawhgb_SNO>VARCHAR(16)</rawhgb_SNO>
+  <rawhgb_SEQ>SMALLINT</rawhgb_SEQ>
+  <rawhgb_DATE>VARCHAR(32)</rawhgb_DATE>
+  <rawhgb_HGB>VARCHAR(16)</rawhgb_HGB>
+  <rawhgb_HDRK_sl>SMALLINT UNSIGNED</rawhgb_HDRK_sl>
+  <rawhgb_HDRK_sh>SMALLINT UNSIGNED</rawhgb_HDRK_sh>
+  <rawhgb_HDRK_k>SMALLINT UNSIGNED</rawhgb_HDRK_k>
+  <rawhgb_HDRK>TEXT</rawhgb_HDRK>
+  <rawhgb_HBLN_sl>SMALLINT UNSIGNED</rawhgb_HBLN_sl>
+  <rawhgb_HBLN_sh>SMALLINT UNSIGNED</rawhgb_HBLN_sh>
+  <rawhgb_HBLN_k>SMALLINT UNSIGNED</rawhgb_HBLN_k>
+  <rawhgb_HBLN>TEXT</rawhgb_HBLN>
+  <rawhgb_HSMP_sl>SMALLINT UNSIGNED</rawhgb_HSMP_sl>
+  <rawhgb_HSMP_sh>SMALLINT UNSIGNED</rawhgb_HSMP_sh>
+  <rawhgb_HSMP_k>SMALLINT UNSIGNED</rawhgb_HSMP_k>
+  <rawhgb_HSMP>TEXT</rawhgb_HSMP>
+</Config>

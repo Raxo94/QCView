@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config>
+  <Table_Name>BM800</Table_Name>
+  <Server>SERVER=localhost;</Server>
+  <Database>DATABASE=bm800_prod_revised_2;</Database>
+  <User_Id>UID=root;</User_Id>
+  <Password>PASSWORD=Skynet;</Password>
+  <Main_Directory>C:\Mjukvara\Visual Studio\CSharp\Boule Tools\Restart QCParser\QC Parser Viewer - Working\QCP Viewer\bin\Debug</Main_Directory>
+  <Sort_Order>instrinfo:smpinfo:smpresult:hgrams:rawred:rawwht:rawhgb:tparams</Sort_Order>
+  <Database_Manual>DATABASE=bm800_QCReport;</Database_Manual>
+  <Lim_RCT>12/16</Lim_RCT>
+  <Lim_WCT>9/13</Lim_WCT>
+  <Lim_RCT_EOS>20/30</Lim_RCT_EOS>
+  <Lim_CV_RBC>0/2.0</Lim_CV_RBC>
+  <Lim_CV_MCV>0/1.7</Lim_CV_MCV>
+  <Lim_CV_PLT>0/5.3</Lim_CV_PLT>
+  <Lim_CV_MPV>0/2.4</Lim_CV_MPV>
+  <Lim_CV_HGB>0/1.7</Lim_CV_HGB>
+  <Lim_CV_WBC>0/3.9</Lim_CV_WBC>
+  <Lim_BLANK_RBC>0/0.01</Lim_BLANK_RBC>
+  <Lim_BLANK_PLT>0/10.0</Lim_BLANK_PLT>
+  <Lim_BLANK_HGB>0/0.1</Lim_BLANK_HGB>
+  <Lim_BLANK_WBC>0/0.1</Lim_BLANK_WBC>
+  <Lim_CALIB_OTMPAPD_RBC>-20/20:-20/20:-20/20</Lim_CALIB_OTMPAPD_RBC>
+  <Lim_CALIB_OTMPAPD_MCV>-2/2:-2/2:-8/8</Lim_CALIB_OTMPAPD_MCV>
+  <Lim_CALIB_OTMPAPD_PLT>0/20:-5/15:-5/15</Lim_CALIB_OTMPAPD_PLT>
+  <Lim_CALIB_OTMPAPD_MPV>-30/-10:-10/30:-10/30</Lim_CALIB_OTMPAPD_MPV>
+  <Lim_CALIB_OTMPAPD_HGB>-20/0:-20/0:-20/0</Lim_CALIB_OTMPAPD_HGB>
+  <Lim_CALIB_OTMPAPD_WBC>-20/5:-20/5:-20/5</Lim_CALIB_OTMPAPD_WBC>
+  <Table_Manual>QC_ReportData</Table_Manual>
+  <Start_All>True</Start_All>
+  <Exp_CVRBC>1.1</Exp_CVRBC>
+  <Exp_CVMCV>0.3</Exp_CVMCV>
+  <Exp_CVPLT>3.3</Exp_CVPLT>
+  <Exp_CVMPV>2.4</Exp_CVMPV>
+  <Exp_CVHGB>1.0</Exp_CVHGB>
+  <Exp_CVWBC>1.8</Exp_CVWBC>
+  <Table_Yieldlabel>statistics_yield_label</Table_Yieldlabel>
+  <Select_Single_Values>RBC:MCV:PLT:MPV:HGB:WBC:HCT:MCH:MCHC:RDWR:RDWA:PCT:PDW:LPCR:LA:LR:MA:MR:GA:GR:EA:ER</Select_Single_Values>
+  <Select_Single_Filter>ALLA:OT:PD:MC:CT:AS</Select_Single_Filter>
+  <QCP_Version>0.24</QCP_Version>
+  <PLT_K>2,500</PLT_K>
+  <PLT_M>2,500</PLT_M>
+  <Export_Directory>C:\Mjukvara\Visual Studio\CSharp\Boule Tools\QC-View\QCP Viewer\bin\Release</Export_Directory>
+  <Export_Color>Blue</Export_Color>
+</Config>
