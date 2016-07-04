@@ -682,9 +682,10 @@ namespace Config
         public String Password = "";
         public String Connection { get { return Server + Database + User_Id + Password; } }
         public String ConnectionM { get { return Server + Database_Manual + User_Id + Password; } }
-
+        public bool useSqlite;
         public CConfigConnection()
         {
+            useSqlite = false;
             CConfig cfg = new CConfig();
             if (!cfg.Exist())
                 cfg.InitSQLDefaults();

@@ -13,16 +13,16 @@ using MySql.Data.MySqlClient;
 namespace SQLite
 {
     enum ORDER { ASC, DESC};
-    class CSQLite
+    class CMYSQL
     {
         private CConfigConnection cfg = new CConfigConnection();
         /*
-        public CSQLite()
+        public CMYSQL()
         {
             CConfig sort = new CConfig();
             Sorter = sort.Read("Sort_Order", ':');
         }*/
-        public CSQLite(TableType type){}
+        public CMYSQL(TableType type){}
        
         //Get Parameters
         public int miGetTestedInstruments(string user, string week)
