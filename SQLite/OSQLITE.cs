@@ -10,35 +10,67 @@ using System.Drawing;
 using System.IO;
 using Stringer;
 using MySql.Data.MySqlClient;
+using System.Data.SQLite;
+
 namespace SQLite
 {
-    enum ORDER { ASC, DESC};
-    class CMYSQL
+
+    public class OConfigConnection
     {
-        private CConfigConnection cfg = new CConfigConnection();
+        public String Table_Manual = "";
+        public String Server = "";
+        public String Database = "";
+        public String Database_Manual = "";
+        public String Table_Yieldlabel = "";
+        public String User_Id = "";
+        public String Password = "";
+        public String Connection { get { return Server + Database + User_Id + Password; } }
+        public String ConnectionM { get { return Server + Database_Manual + User_Id + Password; } }
+        public bool useSqlite;
+        public OConfigConnection()
+        {
+            useSqlite = false;
+            CConfig cfg = new CConfig();
+            if (!cfg.Exist())
+                cfg.InitSQLDefaults();
+
+            Server = cfg.Read("Server");
+            Database = cfg.Read("Database");
+            Database_Manual = cfg.Read("Database_Manual");
+            User_Id = cfg.Read("User_Id");
+            Password = cfg.Read("Password");
+            Table_Manual = cfg.Read("Table_Manual");
+            Table_Yieldlabel = cfg.Read("Table_Yieldlabel");
+        }
+    }//end class
+
+
+    class OSQLITE
+    {
+        private OConfigConnection Ocfg = new OConfigConnection();
         /*
         public CMYSQL()
         {
             CConfig sort = new CConfig();
             Sorter = sort.Read("Sort_Order", ':');
         }*/
-        public CMYSQL(TableType type){}
-       
+        public OSQLITE(TableType type) { }
+
         //Get Parameters
         public int miGetTestedInstruments(string user, string week)
         {
-            string query = "SELECT id FROM " + cfg.Table_Manual + " WHERE User='" + user + "'" + 
+            string query = "SELECT id FROM " + Ocfg.Table_Manual + " WHERE User='" + user + "'" +
                            " AND Week>'" + week + "'";
-            return ExecuteReaderC(cfg.ConnectionM, query).Items.Count;
+            return ExecuteReaderC(Ocfg.ConnectionM, query).Items.Count;
         }
         public int miGetSamplesPerInstrument(string user, string week)
         {
-            string query = "SELECT DISTINCT Serial FROM " + cfg.Table_Manual + " WHERE User='" + user + "'" +
+            string query = "SELECT DISTINCT Serial FROM " + Ocfg.Table_Manual + " WHERE User='" + user + "'" +
                            " AND Week>'" + week + "'";
             double count = 0;
             double ncount = 0;
             double val = 0;
-            foreach (string x in ExecuteReaderC(cfg.ConnectionM, query).Items)
+            foreach (string x in ExecuteReaderC(Ocfg.ConnectionM, query).Items)
             {
                 ncount = (double)InfoRowCountS(x);
                 val += ncount;
@@ -52,22 +84,22 @@ namespace SQLite
         }
         public string miGetNoProblem(string weeks)
         {
-            string query = "SELECT id FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks + "'" +
+            string query = "SELECT id FROM " + Ocfg.Table_Manual + " WHERE Week>'" + weeks + "'" +
                             " AND BlanksTomany IS NULL AND CompChange IS NULL";
-            return ExecuteReaderC(cfg.ConnectionM, query).Items.Count.ToString(); 
+            return ExecuteReaderC(Ocfg.ConnectionM, query).Items.Count.ToString();
         }
         public int miGetIssues(string column, string weeks)
         {
             string query;
             if (column != "BlanksTomany")
-                query = "SELECT " + column + " FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks + "'" +
+                query = "SELECT " + column + " FROM " + Ocfg.Table_Manual + " WHERE Week>'" + weeks + "'" +
                         " AND CompChange IS NOT NULL";
             else
-                query = "SELECT " + column + " FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks + "'";
+                query = "SELECT " + column + " FROM " + Ocfg.Table_Manual + " WHERE Week>'" + weeks + "'";
 
             int count = 0;
             int iout = 1;
-            foreach (string x in ExecuteReaderC(cfg.ConnectionM, query).Items)
+            foreach (string x in ExecuteReaderC(Ocfg.ConnectionM, query).Items)
             {
                 iout = 1;
                 if (int.TryParse(x, out iout))
@@ -87,11 +119,11 @@ namespace SQLite
         public int miGetReCalConf(string column, string weeks)
         {
             string query;
-            query = "SELECT " + column + " FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks + "'";
+            query = "SELECT " + column + " FROM " + Ocfg.Table_Manual + " WHERE Week>'" + weeks + "'";
 
             int count = 0;
             int iout;
-            foreach (string x in ExecuteReaderC(cfg.ConnectionM, query).Items)
+            foreach (string x in ExecuteReaderC(Ocfg.ConnectionM, query).Items)
             {
                 if (int.TryParse(x, out iout) || (x != ""))
                     count += iout;
@@ -108,47 +140,47 @@ namespace SQLite
         {
             string query = "SELECT CVRBC_AVG50, CVMCV_AVG50, CVPLT_AVG50, " +
                             "CVMPV_AVG50, CVHGB_AVG50, CVWBC_AVG50" +
-                            " FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks
+                            " FROM " + Ocfg.Table_Manual + " WHERE Week>'" + weeks
                             + "' AND Model !='exigo' AND Model !='EOS' AND CVPLT IS NOT NULL ORDER BY id";
-            return ExecuteReaderGDS(cfg.ConnectionM, query);
+            return ExecuteReaderGDS(Ocfg.ConnectionM, query);
         }
         public GraphDataSet miGetYield(string weeks)
         {
-            string query = "SELECT Serial, Yield FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks
+            string query = "SELECT Serial, Yield FROM " + Ocfg.Table_Manual + " WHERE Week>'" + weeks
                             + "' ORDER BY id";
-            GraphDataSet result = ExecuteReaderGDSS(cfg.ConnectionM, query, "Yield")[0];
+            GraphDataSet result = ExecuteReaderGDSS(Ocfg.ConnectionM, query, "Yield")[0];
             result.limit = 75;
             return result;
         }
         public GraphDataSet miGetYield2(string weeks)
         {
-            string query = "SELECT Serial, Yield FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks
+            string query = "SELECT Serial, Yield FROM " + Ocfg.Table_Manual + " WHERE Week>'" + weeks
                             + "' ORDER BY id";
-            GraphDataSet result = ExecuteReaderGDSS(cfg.ConnectionM, query, "Yield", "Serial")[0];
+            GraphDataSet result = ExecuteReaderGDSS(Ocfg.ConnectionM, query, "Yield", "Serial")[0];
             result.limit = 75;
             return result;
         }
         public GraphDataSet miGetSEQnbrs(string weeks, string model)
         {
-            string query = "SELECT Serial, Week, SEQnbrs FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks
+            string query = "SELECT Serial, Week, SEQnbrs FROM " + Ocfg.Table_Manual + " WHERE Week>'" + weeks
                             + "' AND Model = '" + model + "' AND Extra IS NULL ORDER BY id";
-            GraphDataSet result = ExecuteReaderGDSSWeek(cfg.ConnectionM, query, "SEQnbrs")[0];
+            GraphDataSet result = ExecuteReaderGDSSWeek(Ocfg.ConnectionM, query, "SEQnbrs")[0];
             result.limit = 75;
             return result;
         }
         public CStringer miComponents(string weeks)
         {
-            string query = "SELECT CompChange FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks
+            string query = "SELECT CompChange FROM " + Ocfg.Table_Manual + " WHERE Week>'" + weeks
                             + "' AND CompChange IS NOT NULL ORDER BY id";
-            return ExecuteReaderC(cfg.ConnectionM, query);
+            return ExecuteReaderC(Ocfg.ConnectionM, query);
         }
 
         //Master ID's
         public CStringer miGetIDs(string weeks)
         {
-            string query = "SELECT id FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks + "'";
+            string query = "SELECT id FROM " + Ocfg.Table_Manual + " WHERE Week>'" + weeks + "'";
             MessageBox.Show(query);
-            return ExecuteReaderC(cfg.ConnectionM, query);
+            return ExecuteReaderC(Ocfg.ConnectionM, query);
         }
 
         //Execute Query
@@ -157,13 +189,14 @@ namespace SQLite
             DataTable dt = new DataTable();
             GraphDataSet temp;
             Collection<GraphDataSet> result = new Collection<GraphDataSet>();
-            
+
             try
             {
-                MySqlConnection cnn = new MySqlConnection(connection);
+                SQLiteConnection cnn = new SQLiteConnection(connection);
                 cnn.Open();
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataAdapter da = new MySqlDataAdapter(mycommand);
+
+                SQLiteCommand mycommand = new  SQLiteCommand(query, cnn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(mycommand);
                 da.Fill(dt);
                 cnn.Close();
                 string lastval;
@@ -175,7 +208,7 @@ namespace SQLite
                     {
                         if ((row[x.ColumnName] != System.DBNull.Value))
                         {
-                            lastval = (string)row[x.ColumnName].ToString(); 
+                            lastval = (string)row[x.ColumnName].ToString();
                             temp.Add(lastval);
 
                         }
@@ -184,7 +217,7 @@ namespace SQLite
                             temp.Add(lastval);
                         }
 
-                        
+
                     }
                     result.Add(temp);
                 }
@@ -202,13 +235,13 @@ namespace SQLite
 
             try
             {
-                MySqlConnection cnn = new MySqlConnection(connection);
+                SQLiteConnection cnn = new SQLiteConnection(connection);
                 cnn.Open();
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataAdapter da = new MySqlDataAdapter(mycommand);
+                 SQLiteCommand mycommand = new  SQLiteCommand(query, cnn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(mycommand);
                 da.Fill(dt);
                 cnn.Close();
-                
+
                 string lastval;
                 lastval = "0";
                 temp = new GraphDataSet(column);
@@ -257,10 +290,10 @@ namespace SQLite
 
             try
             {
-                MySqlConnection cnn = new MySqlConnection(connection);
+                SQLiteConnection cnn = new SQLiteConnection(connection);
                 cnn.Open();
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataAdapter da = new MySqlDataAdapter(mycommand);
+                 SQLiteCommand mycommand = new  SQLiteCommand(query, cnn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(mycommand);
                 da.Fill(dt);
                 cnn.Close();
 
@@ -271,7 +304,7 @@ namespace SQLite
                 if (dt.Rows.Count > 0)
                 {
                     lastval = (string)dt.Rows[0][column1].ToString();
-                    sno = dt.Rows[0][column2].ToString(); 
+                    sno = dt.Rows[0][column2].ToString();
                     temp.Add(lastval, sno);
                     string lastserial = dt.Rows[0]["Serial"].ToString();
                     foreach (DataRow row in dt.Rows)
@@ -330,10 +363,10 @@ namespace SQLite
 
             try
             {
-                MySqlConnection cnn = new MySqlConnection(connection);
+                SQLiteConnection cnn = new SQLiteConnection(connection);
                 cnn.Open();
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataAdapter da = new MySqlDataAdapter(mycommand);
+                 SQLiteCommand mycommand = new  SQLiteCommand(query, cnn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(mycommand);
                 da.Fill(dt);
                 cnn.Close();
 
@@ -383,10 +416,10 @@ namespace SQLite
             CStringer result = new CStringer();
             try
             {
-                MySqlConnection cnn = new MySqlConnection(connection);
+                SQLiteConnection cnn = new SQLiteConnection(connection);
                 cnn.Open();
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataReader reader = mycommand.ExecuteReader();
+                SQLiteCommand mycommand = new  SQLiteCommand(query, cnn);
+                SQLiteDataReader reader = mycommand.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();
                 cnn.Close();
@@ -394,7 +427,7 @@ namespace SQLite
                 foreach (DataColumn x in dt.Columns)
                     foreach (DataRow row in dt.Rows)
                         if ((row[x.ColumnName] != System.DBNull.Value))
-                            result.Add((string)row[x.ColumnName].ToString()); 
+                            result.Add((string)row[x.ColumnName].ToString());
 
             }
             catch (MySqlException e) { MessageBox.Show(e.Message); }
@@ -408,11 +441,12 @@ namespace SQLite
             int result = 0;
             try
             {
-                MySqlConnection cnn = new MySqlConnection(cfg.Connection);
+                SQLiteConnection cnn = new SQLiteConnection(Ocfg.Connection);
                 cnn.Open();
                 string query = "SELECT master_id FROM bm800_sample_instrinfo WHERE instrinfo_SNO='" + serial + "'";
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataReader reader = mycommand.ExecuteReader();
+                 SQLiteCommand mycommand = new  SQLiteCommand(query, cnn);
+                SQLiteDataReader reader = mycommand.ExecuteReader();
+                
                 dt.Load(reader);
                 result = dt.Rows.Count;
                 reader.Close();
@@ -422,6 +456,6 @@ namespace SQLite
             return result;
         }
 
-    }//end class
-}//end namespace
 
+    }
+}

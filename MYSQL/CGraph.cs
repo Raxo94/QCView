@@ -17,6 +17,7 @@ using Stringer;
 using System.Globalization;
 using System.Windows.Forms.DataVisualization;
 using System.Windows.Forms.DataVisualization.Charting;
+using MySQL;
 namespace Graph
 {
     enum CVType {Expected, Absolute}; 
@@ -75,7 +76,8 @@ namespace Graph
                     string text = ct.Show("Yield Text");
                     if (MessageBox.Show("Lägga till text för punkt " + xval.ToString() + ":" + yval.ToString() + " ?", "Yield Text", MessageBoxButtons.OKCancel) == DialogResult.OK)
                     {
-                        CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+                        //CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+                        OSQLITE sql = new OSQLITE(TableType.bm800_sample);
                         GraphDataSet gd = sql.miGetYield2(curdate);
                         string name = "SNO." + gd.SNO[xval].ToString() + "." + gd.Y[xval].ToString();
                         CConfig cfg = new CConfig("Yieldtext.xml");
@@ -111,7 +113,8 @@ namespace Graph
             curweek = weeks;
             showlab = showlabel;
 
-            CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            //CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            OSQLITE sql = new OSQLITE(TableType.bm800_sample);
             GraphDataSet gd = sql.miGetYield2(date);
 
             ichart.Series[0].Points.Clear();
@@ -142,7 +145,8 @@ namespace Graph
         }
         public void FillCV(string date, string weeks, CVType cvtype)
         {
-            CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            //CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            OSQLITE sql = new OSQLITE(TableType.bm800_sample);
             CConfig cfg = new CConfig();
             string limit = "";
 
@@ -223,7 +227,8 @@ namespace Graph
         }
         public void FillInstrument(string date, string weeks, CVType cvtype)
         {
-            CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            //CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            OSQLITE sql = new OSQLITE(TableType.bm800_sample);
             CConfig cfg = new CConfig();
 
             //get data 
@@ -286,7 +291,8 @@ namespace Graph
         }
         public void FillProblem(string date, string weeks)
         {
-            CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            // CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            OSQLITE sql = new OSQLITE(TableType.bm800_sample);
 
             int count = 0;
             int val = 0;

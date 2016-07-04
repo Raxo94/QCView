@@ -10,3 +10,5 @@ D:\arbete\WorkingCopy\QCView\obj\Debug\QCP_Viewer.Properties.Resources.resources
 D:\arbete\WorkingCopy\QCView\obj\Debug\QC-View.csproj.GenerateResource.Cache
 D:\arbete\WorkingCopy\QCView\obj\Debug\QC-View.exe
 D:\arbete\WorkingCopy\QCView\obj\Debug\QC-View.pdb
+D:\arbete\WorkingCopy\QCView\bin\Debug\System.Data.SQLite.dll
+D:\arbete\WorkingCopy\QCView\bin\Debug\System.Data.SQLite.pdb

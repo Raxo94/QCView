@@ -121,7 +121,8 @@ namespace QCP_Viewer
             if (tcSelector.SelectedTab.Name == "tpYield")
             {
                 //iYield = true;
-                CMYSQL sql = new CMYSQL(TableType.None);
+                //CMYSQL sql = new CMYSQL(TableType.None);
+                OSQLITE sql = new OSQLITE(TableType.None);
                 gYield.FillYield(date, iweeks.ToString(), cbShowlabels.Checked);
             }
         }
