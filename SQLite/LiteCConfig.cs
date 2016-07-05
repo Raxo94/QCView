@@ -11,10 +11,10 @@
  *  2013-04-05 MARO Major cleanup - removed all references not being used in QC-View + GUI fix for VS2008/2012 differences
  *  
  *  Public Functions:   void Show(IWin32Window owner)
- *                      Collection<CParameter> Read()
+ *                      Collection<LiteCParameter> Read()
  *                      String Read(String parametername)
  *                      Collection<String> GetParameternames()
- *  Added class:        class CParameter
+ *  Added class:        class LiteCParameter
  *  
  *  Use: Edit config file using inbuilt editor
  *                      CConfig config = new CConfig();
@@ -44,22 +44,23 @@ using System.Windows.Forms;
 using System.Drawing;
 using Stringer;
 
+
 namespace LiteConfig
 {
     enum TableType { bm800_sample, bm800_settings, bm800_instrlog, bm800_caliblog, manual_instrlog, None }
-    class CConfig //reads the xml
+    class LiteCConfig //reads the xml
     {
-        private Collection<CParameter> Parameterlist = new Collection<CParameter>();
-        private CParameter Parameter = new CParameter();
+        private Collection<LiteCParameter> Parameterlist = new Collection<LiteCParameter>();
+        private LiteCParameter Parameter = new LiteCParameter();
         private Form configForm;
         private Button buttonClose;
         private Button buttonCancel;
         private DataGridView dgView;
         private String xmlfilename = "Config.xml";
         private String xmlPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\";
-        public CConfig() { }
+        public LiteCConfig() { }
 
-        public CConfig(String filename) 
+        public LiteCConfig(String filename) 
         {
             xmlPath = "";
             xmlfilename = filename; 
@@ -75,12 +76,12 @@ namespace LiteConfig
         {
             if (e.KeyCode == Keys.Delete)
             {
-                CConfig del = new CConfig(xmlfilename);
+                LiteCConfig del = new LiteCConfig(xmlfilename);
                 String param = dgView.SelectedCells[0].Value.ToString();
 
                 del.DeleteParameter(param);
                 dgView.Rows.Clear();
-                foreach (CParameter x in del.Read())
+                foreach (LiteCParameter x in del.Read())
                 {
                     dgView.Rows.Add();
                     dgView.Rows[dgView.Rows.Count - 2].Cells[0].Value = x.Name;
@@ -132,7 +133,7 @@ namespace LiteConfig
             dgView.Columns["dgValue"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgView.Columns["dgValue"].FillWeight = 60;
 
-            foreach (CParameter x in Parameterlist)
+            foreach (LiteCParameter x in Parameterlist)
             {
                 dgView.Rows.Add();
                 dgView.Rows[dgView.Rows.Count - 2].Cells[0].Value = x.Name;
@@ -186,7 +187,7 @@ namespace LiteConfig
             xw.WriteStartElement("Config");
 
             //Write each node from parameterlist
-            foreach (CParameter x in Parameterlist)
+            foreach (LiteCParameter x in Parameterlist)
             {
                 xw.WriteStartElement(x.Name);
                 xw.WriteString(x.Value);
@@ -302,13 +303,13 @@ namespace LiteConfig
 
         }
         /// <summary>
-        /// Gets all config data in a CParameter collection 
+        /// Gets all config data in a LiteCParameter collection 
         /// </summary>
         /// <returns>All parameters and values in config file</returns>
-        public Collection<CParameter> Read()
+        public Collection<LiteCParameter> Read()
         {
-            CParameter temp;
-            Collection<CParameter> result = new Collection<CParameter>();
+            LiteCParameter temp;
+            Collection<LiteCParameter> result = new Collection<LiteCParameter>();
 
             XmlReaderSettings xmlsettings = new XmlReaderSettings();
             xmlsettings.ConformanceLevel = ConformanceLevel.Fragment;
@@ -327,7 +328,7 @@ namespace LiteConfig
             xNode = xmlDoc.SelectSingleNode("Config");
             foreach (XmlNode x in xNode.ChildNodes)
             {
-                temp = new CParameter();
+                temp = new LiteCParameter();
                 temp.Name = x.Name;
                 temp.Value = x.InnerText;
                 result.Add(temp);
@@ -495,7 +496,7 @@ namespace LiteConfig
 
     }//End Class
 
-    public class CParameter
+    public class LiteCParameter
     {
         public String Name = "";
         public String Value = "";
@@ -503,7 +504,7 @@ namespace LiteConfig
         /// <summary>
         /// A single set of config parameter (Name, Value)
         /// </summary>
-        public CParameter() { }
+        public LiteCParameter() { }
     }//End Class
 
     public class GraphDataSet
@@ -671,7 +672,7 @@ namespace LiteConfig
 
     }//End Class
 
-    public class CConfigConnection
+    public class LiteCConfigConnection
     {
         public String Table_Manual = "";
         public String Server = "";
@@ -683,20 +684,20 @@ namespace LiteConfig
         public String Connection { get { return Server + Database + User_Id + Password; } }
         public String ConnectionM { get { return Server + Database_Manual + User_Id + Password; } }
         public bool useSqlite;
-        public CConfigConnection()
+        public LiteCConfigConnection()
         {
             useSqlite = false;
-            CConfig cfg = new CConfig();
+            LiteCConfig cfg = new LiteCConfig();
             if (!cfg.Exist())
                 cfg.InitSQLDefaults();
 
-            Server = cfg.Read("Server");
-            Database = cfg.Read("Database");
-            Database_Manual = cfg.Read("Database_Manual");
-            User_Id = cfg.Read("User_Id");
-            Password = cfg.Read("Password");
-            Table_Manual = cfg.Read("Table_Manual");
-            Table_Yieldlabel = cfg.Read("Table_Yieldlabel");
+            Server = "temp";
+            Database = "temp";
+            Database_Manual = "temp";
+            User_Id = "temp";
+            Password = "Temp";
+            Table_Manual = "Temp";
+            Table_Yieldlabel = "Temp";
         }
     }//end class
 }//End Namespace

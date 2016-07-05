@@ -18,21 +18,23 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using Config;
+//using Config;
 using Stringer;
+using LiteGraph;
 //using SQLite;
-using Graph;
+//using Graph;
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using CMYSQLN;
+using OSQLITE;
+using LiteConfig;
 
 namespace QCP_Viewer
 {
     public partial class Form1 : Form
     {
         CStringer tables = new CStringer();
-        CGraph gProblem, gCV, gYield, gUser, gComponents;
+        LiteCGraph gProblem, gCV, gYield, gUser, gComponents;
         bool selectionweek = true;
         Collection<string> yieldtexts = new Collection<string>();
         public Form1()
@@ -42,12 +44,12 @@ namespace QCP_Viewer
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            CConfig cfg = new CConfig("Yieldtext.xml");
-            gProblem = new CGraph(chProblem, this.tpProblem);
-            gComponents = new CGraph(chComponents, this.tpKomponenter);
-            gYield = new CGraph(chYield, this.tpYield, cfg.Read());
-            gUser = new CGraph(chUser, this.tpUser);
-            gCV = new CGraph(chCV, this.tpCV);
+            LiteCConfig cfg = new LiteCConfig("Yieldtext.xml");
+            gProblem = new LiteCGraph(chProblem, this.tpProblem);
+            gComponents = new LiteCGraph(chComponents, this.tpKomponenter);
+            gYield = new LiteCGraph(chYield, this.tpYield, cfg.Read());
+            gUser = new LiteCGraph(chUser, this.tpUser);
+            gCV = new LiteCGraph(chCV, this.tpCV);
 
             for (int i = 1; i <= 52; i++)
                 cbWeeks.Items.Add(i);
@@ -122,7 +124,7 @@ namespace QCP_Viewer
             if (tcSelector.SelectedTab.Name == "tpYield")
             {
                 //iYield = true;
-                CMYSQL sql = new CMYSQL(TableType.None);
+                OSQLite sql = new OSQLite(TableType.None);
                 gYield.FillYield(date, iweeks.ToString(), cbShowlabels.Checked);
             }
         }
@@ -136,7 +138,7 @@ namespace QCP_Viewer
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CConfig cfg = new CConfig();
+            LiteCConfig cfg = new LiteCConfig();
             cfg.Show();
         }
 
@@ -222,7 +224,7 @@ namespace QCP_Viewer
                     string dir = sf.FileName;
                     string date = GetYearWeek(52);
                     Control crtl = new Control();
-                    //CGraph pdfGraph = new CGraph(chYield, this.tpYield, cfg.Read());
+                    //LiteCGraph pdfGraph = new LiteCGraph(chYield, this.tpYield, cfg.Read());
                     gYield.FillYield(date, "52", true);
                     iTextSharp.text.Image imgYield = iTextSharp.text.Image.GetInstance(gYield.GetImage("img_yi.png"), BaseColor.WHITE);
                     imgYield.ScaleToFit(540f, 300f);

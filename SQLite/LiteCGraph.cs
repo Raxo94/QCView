@@ -10,10 +10,11 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Media;
 using System.Drawing.Imaging;
-using Config;
+//using Config;
 using System.IO;
 //using SQLite;
-using CMYSQLN;
+using OSQLITE;
+using LiteConfig;
 using Stringer;
 using System.Globalization;
 using System.Windows.Forms.DataVisualization;
@@ -21,7 +22,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 namespace LiteGraph
 {
     enum CVType {Expected, Absolute}; 
-    class CGraph
+    class LiteCGraph
     {
        
         private string AppPath;
@@ -30,32 +31,34 @@ namespace LiteGraph
         private string curdate;
         private string curweek;
         private bool showlab;
-        private Collection<CParameter> yieldtexts = new Collection<CParameter>();
+        private Collection<LiteCParameter> yieldtexts = new Collection<LiteCParameter>();
         private Collection<string> yieldserials = new Collection<string>();
         //Drawing
-        public CGraph(Control parent)
+        public LiteCGraph(Control parent)
         {
             AppPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
-            CConfig cfg = new CConfig("Users.xml");
+            LiteCConfig cfg = new LiteCConfig("Users.xml");
+            
+            
             users = cfg.ReadStringer();
         }
-        public CGraph(Chart chart, Control parent)
+        public LiteCGraph(Chart chart, Control parent)
         {
             ichart = chart;
             AppPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
-            CConfig cfg = new CConfig("Users.xml");
+            LiteCConfig cfg = new LiteCConfig("Users.xml");
             users = cfg.ReadStringer();
         }
-        public CGraph(Chart chart, Control parent, Collection<CParameter> yields)
+        public LiteCGraph(Chart chart, Control parent, Collection<LiteCParameter> yields)
         {
             yieldtexts = yields;
-            foreach (CParameter x in yields)
+            foreach (LiteCParameter x in yields)
             {
                 yieldserials.Add(x.Name.Split('.')[1]);
             }
             ichart = chart;
             AppPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
-            CConfig cfg = new CConfig("Users.xml");
+            LiteCConfig cfg = new LiteCConfig("Users.xml");
             users = cfg.ReadStringer();
             ichart.MouseDoubleClick += ichart_MouseDoubleClick;
         }
@@ -76,10 +79,11 @@ namespace LiteGraph
                     string text = ct.Show("Yield Text");
                     if (MessageBox.Show("Lägga till text för punkt " + xval.ToString() + ":" + yval.ToString() + " ?", "Yield Text", MessageBoxButtons.OKCancel) == DialogResult.OK)
                     {
-                        CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+                        
+                        OSQLite sql = new OSQLite(TableType.bm800_sample);
                         GraphDataSet gd = sql.miGetYield2(curdate);
                         string name = "SNO." + gd.SNO[xval].ToString() + "." + gd.Y[xval].ToString();
-                        CConfig cfg = new CConfig("Yieldtext.xml");
+                        LiteCConfig cfg = new LiteCConfig("Yieldtext.xml");
                         cfg.Add(name, text);
                     }
                 }
@@ -87,10 +91,10 @@ namespace LiteGraph
 
             yieldtexts.Clear();
             yieldserials.Clear();
-            CConfig cfb = new CConfig("Yieldtext.xml");
+            LiteCConfig cfb = new LiteCConfig("Yieldtext.xml");
             yieldtexts = cfb.Read();
 
-            foreach (CParameter x in yieldtexts)
+            foreach (LiteCParameter x in yieldtexts)
             {
                 yieldserials.Add(x.Name.Split('.')[1]);
             }
@@ -112,7 +116,7 @@ namespace LiteGraph
             curweek = weeks;
             showlab = showlabel;
 
-            CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            OSQLite sql = new OSQLite(TableType.bm800_sample);
             GraphDataSet gd = sql.miGetYield2(date);
 
             ichart.Series[0].Points.Clear();
@@ -143,8 +147,8 @@ namespace LiteGraph
         }
         public void FillCV(string date, string weeks, CVType cvtype)
         {
-            CMYSQL sql = new CMYSQL(TableType.bm800_sample);
-            CConfig cfg = new CConfig();
+            OSQLite sql = new OSQLite(TableType.bm800_sample);
+            LiteCConfig cfg = new LiteCConfig();
             string limit = "";
 
             //get data 
@@ -224,8 +228,8 @@ namespace LiteGraph
         }
         public void FillInstrument(string date, string weeks, CVType cvtype)
         {
-            CMYSQL sql = new CMYSQL(TableType.bm800_sample);
-            CConfig cfg = new CConfig();
+            OSQLite sql = new OSQLite(TableType.bm800_sample);
+            LiteCConfig cfg = new LiteCConfig();
 
             //get data 
             Collection<GraphDataSet> gd = new Collection<GraphDataSet>();
@@ -287,7 +291,7 @@ namespace LiteGraph
         }
         public void FillProblem(string date, string weeks)
         {
-            CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+             OSQLite sql = new OSQLite(TableType.bm800_sample);
 
             int count = 0;
             int val = 0;
@@ -325,7 +329,7 @@ namespace LiteGraph
 
         public void FillComponents(string date, string weeks)
         {
-            CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            OSQLite sql = new OSQLite(TableType.bm800_sample);
             CStringer comps = sql.miComponents(date);
             int dummy = 1;
             List<string> sortedcomps = new List<string>();
@@ -394,7 +398,7 @@ namespace LiteGraph
         
         public void FillUser(string date, string weeks)
         {
-            CMYSQL sql = new CMYSQL(TableType.bm800_sample);
+            OSQLite sql = new OSQLite(TableType.bm800_sample);
             string[] names = { "", "Instrument", "Samp/Instr" };
             ColumnGraphSet data1 = new ColumnGraphSet();
             data1.Add(users);

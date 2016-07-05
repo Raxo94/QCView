@@ -5,24 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Windows.Forms;
-using Config;
+//using Config;
+using LiteConfig;
 using System.Drawing;
 using System.IO;
 using Stringer;
 using MySql.Data.MySqlClient;
-namespace CMYSQLN
+using System.Data.SQLite;
+namespace OSQLITE
 {
     enum ORDER { ASC, DESC};
-    class CMYSQL
+    class OSQLite
     {
-        private CConfigConnection cfg = new CConfigConnection();
+        private LiteCConfigConnection cfg = new LiteCConfigConnection();
         /*
         public CMYSQL()
         {
             CConfig sort = new CConfig();
             Sorter = sort.Read("Sort_Order", ':');
         }*/
-        public CMYSQL(TableType type){}
+        public OSQLite(TableType type){}
        
         //Get Parameters
         public int miGetTestedInstruments(string user, string week)
@@ -146,8 +148,9 @@ namespace CMYSQLN
         //Master ID's
         public CStringer miGetIDs(string weeks)
         {
-            string query = "SELECT id FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks + "'";
+            string query = "SELECT id FROM " + "TestTransfer" + " WHERE Week>'" + weeks + "'";
             MessageBox.Show(query);
+
             return ExecuteReaderC(cfg.ConnectionM, query);
         }
 
@@ -160,10 +163,10 @@ namespace CMYSQLN
             
             try
             {
-                MySqlConnection cnn = new MySqlConnection(connection);
+                SQLiteConnection cnn = new SQLiteConnection(connection);
                 cnn.Open();
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataAdapter da = new MySqlDataAdapter(mycommand);
+                SQLiteCommand mycommand = new SQLiteCommand(query, cnn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(mycommand);
                 da.Fill(dt);
                 cnn.Close();
                 string lastval;
@@ -189,7 +192,7 @@ namespace CMYSQLN
                     result.Add(temp);
                 }
             }
-            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            catch (SQLiteException e) { MessageBox.Show(e.Message); }
             return result;
         }
 
@@ -202,10 +205,10 @@ namespace CMYSQLN
 
             try
             {
-                MySqlConnection cnn = new MySqlConnection(connection);
+                SQLiteConnection cnn = new SQLiteConnection(connection);
                 cnn.Open();
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataAdapter da = new MySqlDataAdapter(mycommand);
+                SQLiteCommand mycommand = new SQLiteCommand(query, cnn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(mycommand);
                 da.Fill(dt);
                 cnn.Close();
                 
@@ -246,7 +249,7 @@ namespace CMYSQLN
                 }
                 result.Add(temp);
             }
-            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            catch (SQLiteException e) { MessageBox.Show(e.Message); }
             return result;
         }
         private Collection<GraphDataSet> ExecuteReaderGDSS(string connection, string query, string column1, string column2)
@@ -257,10 +260,10 @@ namespace CMYSQLN
 
             try
             {
-                MySqlConnection cnn = new MySqlConnection(connection);
+                SQLiteConnection cnn = new SQLiteConnection(connection);
                 cnn.Open();
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataAdapter da = new MySqlDataAdapter(mycommand);
+                SQLiteCommand mycommand = new SQLiteCommand(query, cnn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(mycommand);
                 da.Fill(dt);
                 cnn.Close();
 
@@ -307,7 +310,7 @@ namespace CMYSQLN
                 }
                 result.Add(temp);
             }
-            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            catch (SQLiteException e) { MessageBox.Show(e.Message); }
             return result;
         }
         private string WeekToDate(string week)
@@ -330,10 +333,10 @@ namespace CMYSQLN
 
             try
             {
-                MySqlConnection cnn = new MySqlConnection(connection);
+                SQLiteConnection cnn = new SQLiteConnection(connection);
                 cnn.Open();
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataAdapter da = new MySqlDataAdapter(mycommand);
+                SQLiteCommand mycommand = new SQLiteCommand(query, cnn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(mycommand);
                 da.Fill(dt);
                 cnn.Close();
 
@@ -374,19 +377,22 @@ namespace CMYSQLN
                 }
                 result.Add(temp);
             }
-            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            catch (SQLiteException e) { MessageBox.Show(e.Message); }
             return result;
         }
         private CStringer ExecuteReaderC(string connection, string query)
         {
+            string dataBaseFilePath = @"Data Source=D:\arbete\WorkingCopy\SQLiteTest\SQLiteTest\database.db;";
             DataTable dt = new DataTable();
             CStringer result = new CStringer();
             try
             {
-                MySqlConnection cnn = new MySqlConnection(connection);
+                SQLiteConnection cnn = new SQLiteConnection(dataBaseFilePath + "Version=3;New=True;Compress=True;");
+                
                 cnn.Open();
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataReader reader = mycommand.ExecuteReader();
+                SQLiteCommand mycommand = new SQLiteCommand(query, cnn);
+                
+                SQLiteDataReader reader = mycommand.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();
                 cnn.Close();
@@ -397,7 +403,7 @@ namespace CMYSQLN
                             result.Add((string)row[x.ColumnName].ToString()); 
 
             }
-            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            catch (SQLiteException e) { MessageBox.Show(e.Message); }
             return result;
         }
 
@@ -408,17 +414,17 @@ namespace CMYSQLN
             int result = 0;
             try
             {
-                MySqlConnection cnn = new MySqlConnection(cfg.Connection);
+                SQLiteConnection cnn = new SQLiteConnection(cfg.Connection);
                 cnn.Open();
                 string query = "SELECT master_id FROM bm800_sample_instrinfo WHERE instrinfo_SNO='" + serial + "'";
-                MySqlCommand mycommand = new MySqlCommand(query, cnn);
-                MySqlDataReader reader = mycommand.ExecuteReader();
+                SQLiteCommand mycommand = new SQLiteCommand(query, cnn);
+                SQLiteDataReader reader = mycommand.ExecuteReader();
                 dt.Load(reader);
                 result = dt.Rows.Count;
                 reader.Close();
                 cnn.Close();
             }
-            catch (MySqlException se) { MessageBox.Show(se.Message); }
+            catch (SQLiteException se) { MessageBox.Show(se.Message); }
             return result;
         }
 
