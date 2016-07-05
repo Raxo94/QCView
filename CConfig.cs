@@ -47,7 +47,7 @@ using Stringer;
 namespace Config
 {
     enum TableType { bm800_sample, bm800_settings, bm800_instrlog, bm800_caliblog, manual_instrlog, None }
-    class CConfig 
+    class CConfig //reads the xml
     {
         private Collection<CParameter> Parameterlist = new Collection<CParameter>();
         private CParameter Parameter = new CParameter();
