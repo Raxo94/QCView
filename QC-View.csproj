@@ -77,9 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CConfig.cs" />
-    <Compile Include="CGraph.cs" />
-    <Compile Include="MYSQL.cs" />
+    <Compile Include="MySQL\LiteCConfig.cs" />
+    <Compile Include="SQLite\CConfig.cs" />
+    <Compile Include="MySQL\LiteCGraph.cs" />
+    <Compile Include="SQLite\CGraph.cs" />
+    <Compile Include="MySQL\MYSQL - Copy.cs" />
+    <Compile Include="SQLite\MYSQL.cs" />
     <Compile Include="CStringer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

@@ -20,11 +20,12 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Config;
 using Stringer;
-using SQLite;
+//using SQLite;
 using Graph;
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using CMYSQLN;
 
 namespace QCP_Viewer
 {
