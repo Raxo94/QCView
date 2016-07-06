@@ -72,9 +72,9 @@ namespace OSQLITE
             foreach (string x in ExecuteReaderC(cfg.ConnectionM, query).Items)
             {
                 iout = 1;
-                if (int.TryParse(x, out iout))
+                if (int.TryParse(x, out iout)) //vad betyder det här?
                     count += iout;
-                else if (x != null)
+                else if (x != null) //so this is if you have several wrongs;
                 {
                     string[] tp = x.Split(':');
                     count += tp.Length;
@@ -98,7 +98,10 @@ namespace OSQLITE
                 if (int.TryParse(x, out iout) || (x != ""))
                     count += iout;
                 else
-                    MessageBox.Show("que?");
+                {
+                    //MessageBox.Show("que?");
+                }
+                    
 
             }
 
@@ -149,9 +152,12 @@ namespace OSQLITE
         public CStringer miGetIDs(string weeks)
         {
             string query = "SELECT id FROM " + "TestTransfer" + " WHERE Week>'" + weeks + "'";
-            MessageBox.Show(query);
+            //MessageBox.Show(query);
 
-            return ExecuteReaderC(cfg.ConnectionM, query);
+            try { return ExecuteReaderC(cfg.ConnectionM, query); }
+            catch (Exception e) { MessageBox.Show(e.Message); }
+
+            return new CStringer();
         }
 
         //Execute Query
@@ -382,16 +388,14 @@ namespace OSQLITE
         }
         private CStringer ExecuteReaderC(string connection, string query)
         {
-            string dataBaseFilePath = @"Data Source=D:\arbete\WorkingCopy\SQLiteTest\SQLiteTest\database.db;";
+            
             DataTable dt = new DataTable();
             CStringer result = new CStringer();
             try
             {
-                SQLiteConnection cnn = new SQLiteConnection(dataBaseFilePath + "Version=3;New=True;Compress=True;");
-                
+                SQLiteConnection cnn = new SQLiteConnection(connection);
                 cnn.Open();
                 SQLiteCommand mycommand = new SQLiteCommand(query, cnn);
-                
                 SQLiteDataReader reader = mycommand.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();

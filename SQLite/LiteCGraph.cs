@@ -311,6 +311,7 @@ namespace LiteGraph
 
             val = sql.miGetReCalConf("Repro", date);
             count += val;
+            //count = 40;
             double repro = val;
 
             val = sql.miGetReCalConf("ReCalib", date);

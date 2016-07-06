@@ -681,8 +681,8 @@ namespace LiteConfig
         public String Table_Yieldlabel = "";
         public String User_Id = "";
         public String Password = "";
-        public String Connection { get { return Server + Database + User_Id + Password; } }
-        public String ConnectionM { get { return Server + Database_Manual + User_Id + Password; } }
+        public String Connection { get { return @"Data Source=D:\arbete\WorkingCopy\TestDataBase.db;" + "Version = 3; New = True; Compress = True;"; /*Server + Database + User_Id + Password;*/ } }
+        public String ConnectionM { get { return @"Data Source=D:\arbete\WorkingCopy\TestDataBase.db;" + "Version = 3; New = True; Compress = True;";/*return Server + Database_Manual + User_Id + Password;*/ } }
         public bool useSqlite;
         public LiteCConfigConnection()
         {
@@ -696,7 +696,7 @@ namespace LiteConfig
             Database_Manual = "temp";
             User_Id = "temp";
             Password = "Temp";
-            Table_Manual = "Temp";
+            Table_Manual = "TestTransfer";
             Table_Yieldlabel = "Temp";
         }
     }//end class
