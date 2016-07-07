@@ -53,13 +53,14 @@ namespace QCP_Viewer
             foreach (LiteCParameter x in cfg.Read()) { temp.Add(x.Value); }
             temp.Sort();
             foreach (string x in temp) { InstrumentComboBox.Items.Add(x); }
-            InstrumentComboBox.SelectedIndex = 0;
+           
             
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             InitializeComboBox();
+            InstrumentComboBox.SelectedIndex = 0;
             LiteCConfig cfg = new LiteCConfig("Yieldtext.xml");
             gProblem = new LiteCGraph(chProblem, this.tpProblem);
             gComponents = new LiteCGraph(chComponents, this.tpKomponenter);
@@ -77,77 +78,93 @@ namespace QCP_Viewer
         }
         private void cbWeeks_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectionweek = true;
-            string date = GetYearWeek(int.Parse(cbWeeks.SelectedItem.ToString()));
-            string weeks = cbWeeks.SelectedItem.ToString();
-            string instrument = InstrumentComboBox.SelectedItem.ToString();
-            if (tcSelector.SelectedTab.Name == "tpProblem")
+            if (cbWeeks.SelectedIndex != -1)
             {
-                //iProblem = true;
-                gProblem.FillProblem(date, weeks, instrument);
-            }
-            if (tcSelector.SelectedTab.Name == "tpKomponenter")
-            {
-                //iProblem = true;
-                gComponents.FillComponents(date, weeks);
-            }
-            if (tcSelector.SelectedTab.Name == "tpUser")
-            {
-                //iUser = true;
-                gUser.FillUser(date, weeks);
-            }
-            if (tcSelector.SelectedTab.Name == "tpCV")
-            {
-                //iCV = true;
-                if (cbCVLimits.Checked)
-                    gCV.FillCV(date, weeks, CVType.Absolute);
-                else
-                    gCV.FillCV(date, weeks, CVType.Expected);
-            }
-            if (tcSelector.SelectedTab.Name == "tpYield")
-            {
-                //iYield = true;
-                gYield.FillYield(date, weeks, cbShowlabels.Checked);
+                selectionweek = true;
+                cbYears.SelectedIndex = -1;
+                string date = GetYearWeek(int.Parse(cbWeeks.SelectedItem.ToString()));
+                string weeks = cbWeeks.SelectedItem.ToString();
+                string instrument = InstrumentComboBox.SelectedItem.ToString();
+                if (tcSelector.SelectedTab.Name == "tpProblem")
+                {
+                    //iProblem = true;
+                    gProblem.FillProblem(date, weeks, instrument);
+                }
+                if (tcSelector.SelectedTab.Name == "tpKomponenter")
+                {
+                    //iProblem = true;
+                    gComponents.FillComponents(date, weeks);
+                }
+                if (tcSelector.SelectedTab.Name == "tpUser")
+                {
+                    //iUser = true;
+                    gUser.FillUser(date, weeks);
+                }
+                if (tcSelector.SelectedTab.Name == "tpCV")
+                {
+                    //iCV = true;
+                    if (cbCVLimits.Checked)
+                        gCV.FillCV(date, weeks, CVType.Absolute);
+                    else
+                        gCV.FillCV(date, weeks, CVType.Expected);
+                }
+                if (tcSelector.SelectedTab.Name == "tpYield")
+                {
+                    //iYield = true;
+                    gYield.FillYield(date, weeks, cbShowlabels.Checked);
+                }
             }
         }
         private void cbYears_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectionweek = false;
-            int iweeks = int.Parse(cbYears.SelectedItem.ToString()) * 52;
-            string date = GetYearWeek(iweeks);
-            string instrument = InstrumentComboBox.SelectedItem.ToString();
-            if (tcSelector.SelectedTab.Name == "tpProblem")
+            if (cbYears.SelectedIndex != -1)
             {
-                //iProblem = true;
-                gProblem.FillProblem(date, iweeks.ToString(),instrument);
-            }
-            if (tcSelector.SelectedTab.Name == "tpKomponenter")
-            {
-                //iProblem = true;
-                gComponents.FillComponents(date, iweeks.ToString());
-            }
-            if (tcSelector.SelectedTab.Name == "tpUser")
-            {
-                //iUser = true;
-                gUser.FillUser(date, iweeks.ToString());
-            }
-            if (tcSelector.SelectedTab.Name == "tpCV")
-            {
-                //iCV = true;
-                if (cbCVLimits.Checked)
-                    gCV.FillCV(date, iweeks.ToString(), CVType.Absolute);
-                else
-                    gCV.FillCV(date, iweeks.ToString(), CVType.Expected);
-            }
-            if (tcSelector.SelectedTab.Name == "tpYield")
-            {
-                //iYield = true;
-                OSQLite sql = new OSQLite();
-                gYield.FillYield(date, iweeks.ToString(), cbShowlabels.Checked);
+                selectionweek = false;
+                cbWeeks.SelectedIndex = -1;
+                int iweeks = int.Parse(cbYears.SelectedItem.ToString()) * 52;
+                string date = GetYearWeek(iweeks);
+                string instrument = InstrumentComboBox.SelectedItem.ToString();
+                if (tcSelector.SelectedTab.Name == "tpProblem")
+                {
+                    //iProblem = true;
+                    gProblem.FillProblem(date, iweeks.ToString(), instrument);
+                }
+                if (tcSelector.SelectedTab.Name == "tpKomponenter")
+                {
+                    //iProblem = true;
+                    gComponents.FillComponents(date, iweeks.ToString());
+                }
+                if (tcSelector.SelectedTab.Name == "tpUser")
+                {
+                    //iUser = true;
+                    gUser.FillUser(date, iweeks.ToString());
+                }
+                if (tcSelector.SelectedTab.Name == "tpCV")
+                {
+                    //iCV = true;
+                    if (cbCVLimits.Checked)
+                        gCV.FillCV(date, iweeks.ToString(), CVType.Absolute);
+                    else
+                        gCV.FillCV(date, iweeks.ToString(), CVType.Expected);
+                }
+                if (tcSelector.SelectedTab.Name == "tpYield")
+                {
+                    //iYield = true;
+                    OSQLite sql = new OSQLite();
+                    gYield.FillYield(date, iweeks.ToString(), cbShowlabels.Checked);
+                }
             }
         }
         private void InstrumentComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbWeeks.SelectedIndex!=-1)
+            {
+                cbWeeks_SelectedIndexChanged(null, null);
+            }
+            else if(cbYears.SelectedIndex != -1)
+            {
+                cbYears_SelectedIndexChanged(null, null);
+            }
 
             //selectionweek = false;
             //int iweeks = int.Parse(cbYears.SelectedItem.ToString()) * 52;
