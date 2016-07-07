@@ -42,8 +42,24 @@ namespace QCP_Viewer
             InitializeComponent();
             Application.DoEvents();
         }
+
+        private void InitializeComboBox()
+        {
+            LiteCConfig cfg = new LiteCConfig(/*xmlDynamicDirectory +*/ "Instruments.xml");
+            InstrumentComboBox.Items.Clear();
+
+            //Using temp List<> for easy sorting
+            List<string> temp = new List<string>();
+            foreach (LiteCParameter x in cfg.Read()) { temp.Add(x.Value); }
+            temp.Sort();
+            foreach (string x in temp) { InstrumentComboBox.Items.Add(x); }
+            InstrumentComboBox.SelectedIndex = 0;
+            
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            InitializeComboBox();
             LiteCConfig cfg = new LiteCConfig("Yieldtext.xml");
             gProblem = new LiteCGraph(chProblem, this.tpProblem);
             gComponents = new LiteCGraph(chComponents, this.tpKomponenter);
@@ -64,10 +80,11 @@ namespace QCP_Viewer
             selectionweek = true;
             string date = GetYearWeek(int.Parse(cbWeeks.SelectedItem.ToString()));
             string weeks = cbWeeks.SelectedItem.ToString();
+            string instrument = InstrumentComboBox.SelectedItem.ToString();
             if (tcSelector.SelectedTab.Name == "tpProblem")
             {
                 //iProblem = true;
-                gProblem.FillProblem(date, weeks);
+                gProblem.FillProblem(date, weeks, instrument);
             }
             if (tcSelector.SelectedTab.Name == "tpKomponenter")
             {
@@ -98,10 +115,11 @@ namespace QCP_Viewer
             selectionweek = false;
             int iweeks = int.Parse(cbYears.SelectedItem.ToString()) * 52;
             string date = GetYearWeek(iweeks);
+            string instrument = InstrumentComboBox.SelectedItem.ToString();
             if (tcSelector.SelectedTab.Name == "tpProblem")
             {
                 //iProblem = true;
-                gProblem.FillProblem(date, iweeks.ToString());
+                gProblem.FillProblem(date, iweeks.ToString(),instrument);
             }
             if (tcSelector.SelectedTab.Name == "tpKomponenter")
             {
@@ -124,9 +142,46 @@ namespace QCP_Viewer
             if (tcSelector.SelectedTab.Name == "tpYield")
             {
                 //iYield = true;
-                OSQLite sql = new OSQLite(TableType.None);
+                OSQLite sql = new OSQLite();
                 gYield.FillYield(date, iweeks.ToString(), cbShowlabels.Checked);
             }
+        }
+        private void InstrumentComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            //selectionweek = false;
+            //int iweeks = int.Parse(cbYears.SelectedItem.ToString()) * 52;
+            //string date = GetYearWeek(iweeks);
+            //string instrument = InstrumentComboBox.SelectedItem.ToString();
+            //if (tcSelector.SelectedTab.Name == "tpProblem")
+            //{
+            //    //iProblem = true;
+            //    gProblem.FillProblem(date, iweeks.ToString(), instrument);
+            //}
+            //if (tcSelector.SelectedTab.Name == "tpKomponenter")
+            //{
+            //    //iProblem = true;
+            //    gComponents.FillComponents(date, iweeks.ToString());
+            //}
+            //if (tcSelector.SelectedTab.Name == "tpUser")
+            //{
+            //    //iUser = true;
+            //    gUser.FillUser(date, iweeks.ToString());
+            //}
+            //if (tcSelector.SelectedTab.Name == "tpCV")
+            //{
+            //    //iCV = true;
+            //    if (cbCVLimits.Checked)
+            //        gCV.FillCV(date, iweeks.ToString(), CVType.Absolute);
+            //    else
+            //        gCV.FillCV(date, iweeks.ToString(), CVType.Expected);
+            //}
+            //if (tcSelector.SelectedTab.Name == "tpYield")
+            //{
+            //    //iYield = true;
+            //    OSQLite sql = new OSQLite();
+            //    gYield.FillYield(date, iweeks.ToString(), cbShowlabels.Checked);
+            //}
         }
         private void tcSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -205,6 +260,36 @@ namespace QCP_Viewer
             return WeekNumber;
         }
 
+        private void toolStripLabel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripComboBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbYears_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripLabel3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InstrumentComboBox_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cbWeeks_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void cbCVLimits_CheckedChanged(object sender, EventArgs e)
         {
             if (selectionweek)
@@ -223,6 +308,7 @@ namespace QCP_Viewer
                 {
                     string dir = sf.FileName;
                     string date = GetYearWeek(52);
+                    string instrument = InstrumentComboBox.SelectedItem.ToString();
                     Control crtl = new Control();
                     //LiteCGraph pdfGraph = new LiteCGraph(chYield, this.tpYield, cfg.Read());
                     gYield.FillYield(date, "52", true);
@@ -233,7 +319,7 @@ namespace QCP_Viewer
                     imgYield.Alignment = Element.ALIGN_CENTER;
 
                     date = GetYearWeek(4);
-                    gProblem.FillProblem(date, "4");
+                    gProblem.FillProblem(date, "4",instrument);
                     iTextSharp.text.Image imgQC = iTextSharp.text.Image.GetInstance(gProblem.GetImage("img_qc.png"), BaseColor.WHITE);
                     imgQC.ScaleToFit(540f, 300f);
                     imgQC.SpacingBefore = 5f;

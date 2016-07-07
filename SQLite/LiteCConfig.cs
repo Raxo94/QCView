@@ -675,12 +675,10 @@ namespace LiteConfig
     public class LiteCConfigConnection
     {
         public String Table_Manual = "";
-        public String Server = "";
+       
         public String Database = "";
-        public String Database_Manual = "";
-        public String Table_Yieldlabel = "";
-        public String User_Id = "";
-        public String Password = "";
+        //public String Database_Manual = "";
+        //public String Table_Yieldlabel = "";
         public String Connection { get { return @"Data Source=D:\arbete\WorkingCopy\TestDataBase.db;" + "Version = 3; New = True; Compress = True;"; /*Server + Database + User_Id + Password;*/ } }
         public String ConnectionM { get { return @"Data Source=D:\arbete\WorkingCopy\TestDataBase.db;" + "Version = 3; New = True; Compress = True;";/*return Server + Database_Manual + User_Id + Password;*/ } }
         public bool useSqlite;
@@ -691,13 +689,13 @@ namespace LiteConfig
             if (!cfg.Exist())
                 cfg.InitSQLDefaults();
 
-            Server = "temp";
+            
             Database = "temp";
-            Database_Manual = "temp";
-            User_Id = "temp";
-            Password = "Temp";
+            //Database_Manual = "temp";
+           
+            
             Table_Manual = "TestTransfer";
-            Table_Yieldlabel = "Temp";
+            //Table_Yieldlabel = "Temp";
         }
     }//end class
 }//End Namespace

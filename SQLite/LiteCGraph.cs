@@ -80,7 +80,7 @@ namespace LiteGraph
                     if (MessageBox.Show("Lägga till text för punkt " + xval.ToString() + ":" + yval.ToString() + " ?", "Yield Text", MessageBoxButtons.OKCancel) == DialogResult.OK)
                     {
                         
-                        OSQLite sql = new OSQLite(TableType.bm800_sample);
+                        OSQLite sql = new OSQLite();
                         GraphDataSet gd = sql.miGetYield2(curdate);
                         string name = "SNO." + gd.SNO[xval].ToString() + "." + gd.Y[xval].ToString();
                         LiteCConfig cfg = new LiteCConfig("Yieldtext.xml");
@@ -116,7 +116,7 @@ namespace LiteGraph
             curweek = weeks;
             showlab = showlabel;
 
-            OSQLite sql = new OSQLite(TableType.bm800_sample);
+            OSQLite sql = new OSQLite();
             GraphDataSet gd = sql.miGetYield2(date);
 
             ichart.Series[0].Points.Clear();
@@ -147,7 +147,7 @@ namespace LiteGraph
         }
         public void FillCV(string date, string weeks, CVType cvtype)
         {
-            OSQLite sql = new OSQLite(TableType.bm800_sample);
+            OSQLite sql = new OSQLite();
             LiteCConfig cfg = new LiteCConfig();
             string limit = "";
 
@@ -228,7 +228,7 @@ namespace LiteGraph
         }
         public void FillInstrument(string date, string weeks, CVType cvtype)
         {
-            OSQLite sql = new OSQLite(TableType.bm800_sample);
+            OSQLite sql = new OSQLite();
             LiteCConfig cfg = new LiteCConfig();
 
             //get data 
@@ -289,9 +289,9 @@ namespace LiteGraph
             }
 
         }
-        public void FillProblem(string date, string weeks)
+        public void FillProblem(string date, string weeks,string instrument)
         {
-             OSQLite sql = new OSQLite(TableType.bm800_sample);
+             OSQLite sql = new OSQLite();
 
             int count = 0;
             int val = 0;
@@ -301,11 +301,11 @@ namespace LiteGraph
             double noproblems = double.Parse(noprobs);
             int yield = (int)((noproblems / (double)ids.Items.Count) * 100.0);
 
-            val = sql.miGetIssues("CompChange", date);
+            val = sql.miGetIssues("CompChange", date,instrument);
             count += val;
             double component = val;
 
-            val = sql.miGetIssues("BlanksTomany", date);
+            val = sql.miGetIssues("BlanksTomany", date,instrument);
             count += val;
             double dirty = val;
 
@@ -330,7 +330,7 @@ namespace LiteGraph
 
         public void FillComponents(string date, string weeks)
         {
-            OSQLite sql = new OSQLite(TableType.bm800_sample);
+            OSQLite sql = new OSQLite();
             CStringer comps = sql.miComponents(date);
             int dummy = 1;
             List<string> sortedcomps = new List<string>();
@@ -399,7 +399,7 @@ namespace LiteGraph
         
         public void FillUser(string date, string weeks)
         {
-            OSQLite sql = new OSQLite(TableType.bm800_sample);
+            OSQLite sql = new OSQLite();
             string[] names = { "", "Instrument", "Samp/Instr" };
             ColumnGraphSet data1 = new ColumnGraphSet();
             data1.Add(users);

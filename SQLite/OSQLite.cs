@@ -24,7 +24,7 @@ namespace OSQLITE
             CConfig sort = new CConfig();
             Sorter = sort.Read("Sort_Order", ':');
         }*/
-        public OSQLite(TableType type){}
+        public OSQLite(){}
        
         //Get Parameters
         public int miGetTestedInstruments(string user, string week)
@@ -58,15 +58,23 @@ namespace OSQLITE
                             " AND BlanksTomany IS NULL AND CompChange IS NULL";
             return ExecuteReaderC(cfg.ConnectionM, query).Items.Count.ToString(); 
         }
-        public int miGetIssues(string column, string weeks)
+        public int miGetIssues(string column, string weeks,string instrument)
         {
             string query;
+            string instrumentQuery="";
+            if(instrument!="All Instruments")
+            {
+                instrumentQuery = "Instrument = '" + instrument + "' AND ";
+            }
+           
+            
             if (column != "BlanksTomany")
-                query = "SELECT " + column + " FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks + "'" +
+                query = "SELECT " + column + " FROM " + cfg.Table_Manual + " WHERE "+ instrumentQuery + "Week>'" + weeks + "'" +
                         " AND CompChange IS NOT NULL";
+               
             else
                 query = "SELECT " + column + " FROM " + cfg.Table_Manual + " WHERE Week>'" + weeks + "'";
-
+           
             int count = 0;
             int iout = 1;
             foreach (string x in ExecuteReaderC(cfg.ConnectionM, query).Items)
